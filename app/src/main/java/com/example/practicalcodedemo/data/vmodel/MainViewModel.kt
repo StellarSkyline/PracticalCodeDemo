@@ -24,15 +24,23 @@ class MainViewModel:ViewModel() {
     }
 
     val checkLoading by lazy {MutableLiveData<Boolean>()}
+    val checkFail by lazy {MutableLiveData<Boolean>()}
 
 
     fun getPosts(language:String) {
         viewModelScope.launch {
             val x = repo.getRepo(language, "daily","english")
-            withContext(Dispatchers.Main) {
-                postResponse.value = x
-                checkLoading.value = true
-                Log.d("STLog", postResponse.value.toString())
+            if(x.toString() != "[]") {
+                withContext(Dispatchers.Main) {
+                    postResponse.value = x
+                    checkLoading.value = true
+                    Log.d("STLog", postResponse.value.toString())
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    checkFail.value = true
+
+                }
             }
         }
     }

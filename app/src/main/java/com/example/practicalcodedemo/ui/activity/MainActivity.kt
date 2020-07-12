@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -42,6 +43,13 @@ class MainActivity : AppCompatActivity() {
                 false -> {
                     progressBar.visibility = View.VISIBLE
                 }
+            }
+        })
+
+        viewModel.checkFail.observe(this, Observer{
+            if(it) {
+                progressBar.visibility = View.GONE
+                Toast.makeText(applicationContext, "Network Call failed, change the languange and try again", Toast.LENGTH_SHORT).show()
             }
         })
     }
