@@ -1,12 +1,14 @@
 package com.example.practicalcodedemo.data.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalcodedemo.R
 import com.example.practicalcodedemo.data.model.Post
+import com.example.practicalcodedemo.ui.activity.DetailActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout_display.view.*
 
@@ -39,6 +41,12 @@ class DisplayAdapter(var mContext:Context):RecyclerView.Adapter<DisplayAdapter.V
             itemView.text_view_name.text = item.name
             itemView.text_view_stars.text = item.stars.toString()
             itemView.text_view_branch.text = item.forks.toString()
+
+            itemView.setOnClickListener {
+                var intent = Intent(mContext, DetailActivity::class.java)
+                intent.putExtra("data", item)
+                mContext.startActivity(intent)
+            }
 
         }
 
