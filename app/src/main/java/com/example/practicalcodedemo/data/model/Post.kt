@@ -1,5 +1,7 @@
 package com.example.practicalcodedemo.data.model
 
+import java.io.Serializable
+
 data class Post(
     var author: String= "",
     var avatar: String= "",
@@ -12,5 +14,5 @@ data class Post(
     var name: String= "",
     var stars: Int=0,
     var url: String= ""
-)
+):Serializable
 

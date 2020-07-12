@@ -1,3 +1,6 @@
 package com.example.practicalcodedemo.data.model
 
-class PostResponse:ArrayList<Post>()
+import java.io.Serializable
+
+
+class PostResponse:ArrayList<Post>(), Serializable
