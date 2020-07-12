@@ -1,6 +1,7 @@
 package com.example.practicalcodedemo.data.vmodel
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,6 +15,7 @@ class MainViewModel:ViewModel() {
 
     //instance my repo
     val repo = MainRepo()
+    var language:String = ""
 
     val postResponse by lazy {
         val x = MutableLiveData<PostResponse>()
@@ -21,13 +23,23 @@ class MainViewModel:ViewModel() {
         x
     }
 
-    fun getPosts() {
+    val checkLoading by lazy {MutableLiveData<Boolean>()}
+
+
+    fun getPosts(language:String) {
         viewModelScope.launch {
-            val x = repo.getRepo("kotlin", "daily","english")
+            val x = repo.getRepo(language, "daily","english")
             withContext(Dispatchers.Main) {
                 postResponse.value = x
+                checkLoading.value = true
                 Log.d("STLog", postResponse.value.toString())
             }
         }
+    }
+
+    fun onButtonClicked(view: View) {
+        checkLoading.value = false
+        getPosts(language)
+
     }
 }
