@@ -65,4 +65,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:2.2.0"
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
